@@ -1,0 +1,43 @@
+<%@ page pageEncoding="UTF-8" %>
+<div class="barra-app">
+    <c:url var="pedidosNavUrl" value="/pedidos"/>
+    <a class="marca-app" href="${pedidosNavUrl}">
+        <span class="marca-app-icono" aria-hidden="true">SP</span>
+        <span>
+            <strong>Sistema de Pedidos</strong>
+            <small>Panel operativo</small>
+        </span>
+    </a>
+
+    <c:url var="reportesNavUrl" value="/reportes/pedidos"/>
+    <c:url var="supervisionPedidosNavUrl" value="/supervision/pedidos"/>
+    <c:url var="supervisionProductosNavUrl" value="/supervision/productos"/>
+    <nav class="navegacion-app" aria-label="Navegación principal">
+        <a class="enlace-nav ${paginaActiva eq 'pedidos' ? 'activo' : ''}"
+           href="${pedidosNavUrl}" aria-current="${paginaActiva eq 'pedidos' ? 'page' : 'false'}">
+            Pedidos
+        </a>
+        <a class="enlace-nav ${paginaActiva eq 'reportes' ? 'activo' : ''}"
+           href="${reportesNavUrl}" aria-current="${paginaActiva eq 'reportes' ? 'page' : 'false'}">
+            Reportes
+        </a>
+        <c:if test="${puedeSupervisar}">
+            <a class="enlace-nav ${paginaActiva eq 'supervision-pedidos' ? 'activo' : ''}"
+               href="${supervisionPedidosNavUrl}"
+               aria-current="${paginaActiva eq 'supervision-pedidos' ? 'page' : 'false'}">
+                Supervisión de pedidos
+            </a>
+            <a class="enlace-nav ${paginaActiva eq 'supervision-productos' ? 'activo' : ''}"
+               href="${supervisionProductosNavUrl}"
+               aria-current="${paginaActiva eq 'supervision-productos' ? 'page' : 'false'}">
+                Supervisión de productos
+            </a>
+        </c:if>
+    </nav>
+
+    <c:url var="logoutNavUrl" value="/logout"/>
+    <form class="form-cerrar-sesion" method="post" action="${logoutNavUrl}">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+        <button type="submit" class="boton-cerrar-sesion">Cerrar sesión</button>
+    </form>
+</div>
